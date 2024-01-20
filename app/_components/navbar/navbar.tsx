@@ -1,9 +1,22 @@
 "use client";
 import { useState, useEffect } from "react";
-
 //my components
 
-export default function Navbar() {
+interface NavbarProps {
+    routeLogin: (url: string) => void;
+    routeHome: (url: string) => void;
+    Route: string;
+    Submit: string;
+    Login: string;
+}
+
+export default function Navbar({
+    routeLogin,
+    routeHome,
+    Route,
+    Submit,
+    Login,
+}: NavbarProps) {
     const [isScrolled, setIsScrolled] = useState(false);
 
     useEffect(() => {
@@ -18,6 +31,7 @@ export default function Navbar() {
             window.removeEventListener("scroll", handleScroll);
         };
     }, []);
+
     return (
         <header
             className={`p-4 font-poppins fixed top-0 w-full z-10 transition-all ease-in duration-150 ${
@@ -41,9 +55,9 @@ export default function Navbar() {
                     <div className="md:flex md:items-center md:gap-12">
                         <nav aria-label="Global" className="hidden md:block">
                             <div className="flex items-center gap-7">
-                                <button>About</button>
-                                <button>Contact</button>
-                                <button>Login</button>
+                                <button onClick={routeHome}>{Route}</button>
+                                <button>{Submit}</button>
+                                <button onClick={routeLogin}>{Login}</button>
                             </div>
                         </nav>
                     </div>
