@@ -25,6 +25,9 @@ export default function DashboardPage() {
             .then((res) => {
                 cookies.set("accessToken", res.data["accessToken"]);
                 cookies.set("refreshToken", res.data["refreshToken"]);
+            })
+            .catch((error) => {
+                console.log(error);
             });
     }, []);
 

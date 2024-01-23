@@ -3,7 +3,6 @@ import { useRouter } from "next/navigation";
 
 //my components
 import Section from "./_components/section";
-import About from "./_components/about";
 import Form from "./_components/form";
 import Navbar from "./_components/navbar/navbar";
 
@@ -17,14 +16,14 @@ export default function Home() {
         <div>
             <Navbar
                 routeLogin={handleLoginClick}
-                Route="About"
+                routeHome={() => "pass"}
+                Route=""
                 Submit="Submit"
                 Login="Login"
             />
             <div className="min-h-screen max-w-screen-xl mx-auto">
                 <div className="px-24">
                     <Section />
-                    <About />
                     <div className="font-poppins">
                         <div>
                             <div>
