@@ -3,8 +3,8 @@ import { useState, useEffect } from "react";
 //my components
 
 interface NavbarProps {
-    routeLogin: (url: string) => void;
-    routeHome: (url: string) => void;
+    routeLogin: () => void;
+    routeHome: () => void;
     Route: string;
     Submit: string;
     Login: string;
