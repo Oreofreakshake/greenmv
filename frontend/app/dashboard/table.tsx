@@ -4,12 +4,17 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import cookies from "js-cookie";
 import RefreshIcon from "../_components/refreshIcon";
+import ViewDetail from "../_components/viewdetail";
 
 interface DataItem {
     id: number;
     name: string;
     contact: string;
     location: string;
+    issue: string;
+    assignedTo: string;
+    category: string;
+    status: string;
 }
 
 export default function Table() {
@@ -79,9 +84,12 @@ export default function Table() {
                                         {data.location}
                                     </td>
                                     <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                                        <button className="inline-block rounded bg-indigo-600 px-4 py-3 text-sm font-medium text-white transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:bg-indigo-500">
-                                            view
-                                        </button>
+                                        <ViewDetail
+                                            issue={data.issue}
+                                            assignedTo={data.assignedTo}
+                                            category={data.category}
+                                            status={data.status}
+                                        />
                                     </td>
                                 </tr>
                             ))}

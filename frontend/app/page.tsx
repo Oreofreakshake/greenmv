@@ -2,7 +2,7 @@
 import { useRouter } from "next/navigation";
 
 //my components
-import Section from "./_components/section";
+import Heading from "./_components/header";
 import Form from "./_components/form";
 import Navbar from "./_components/navbar/navbar";
 import { useState } from "react";
@@ -39,7 +39,7 @@ export default function Home() {
                 {auth ? (
                     <div className="min-h-screen max-w-screen-xl mx-auto">
                         <div className="px-24">
-                            <Section />
+                            <Heading />
                             <div className="font-poppins">
                                 <div>
                                     <div>
