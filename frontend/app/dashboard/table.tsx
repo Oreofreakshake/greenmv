@@ -39,15 +39,42 @@ export default function Table() {
             });
     };
 
+    const count = data.length;
+    let raisedIssues = 0;
+    for (let i = 0; i < count; i++) {
+        raisedIssues++;
+    }
+
+    let inprogress = 0;
+    for (let i = 0; i < count; i++) {
+        if (data[i].status === "in progress") inprogress++;
+    }
+
+    let done = 0;
+    for (let i = 0; i < count; i++) {
+        if (data[i].status === "done") done++;
+    }
+
     return (
         <div>
+            <div className=" mb-12">
+                <span className="whitespace-nowrap rounded-full bg-purple-100 px-2.5 py-0.5 text-sm text-red-700">
+                    Raised Issues: {raisedIssues}
+                </span>
+                <span className="whitespace-nowrap rounded-full ml-4 bg-purple-100 px-2.5 py-0.5 text-sm text-blue-700">
+                    Issues in progress: {inprogress}
+                </span>
+                <span className="whitespace-nowrap rounded-full ml-4 bg-purple-100 px-2.5 py-0.5 text-sm text-green-700">
+                    Completed Issues: {done}
+                </span>
+            </div>
+
             <div className="flex gap-4 mb-3">
                 <button onClick={refresh}>
                     <RefreshIcon />
                 </button>
                 Refresh the database
             </div>
-
             <div className="overflow-x-auto rounded-lg mb-24 border border-gray-200">
                 <table className="min-w-full divide-y-2 text-left divide-gray-200 bg-white text-sm">
                     <thead className="ltr:text-left rtl:text-right">

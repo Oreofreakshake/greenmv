@@ -4,7 +4,7 @@ import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 
 const people = [{ name: "none" }, { name: "in progress" }, { name: "done" }];
 
-export default function ListBox() {
+export default function ListBox({ data }) {
     const [selected, setSelected] = useState(people[0]);
 
     return (
@@ -13,9 +13,7 @@ export default function ListBox() {
                 <Listbox value={selected} onChange={setSelected}>
                     <div className="relative mt-1">
                         <Listbox.Button className="w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
-                            <span className="block truncate">
-                                {selected.name}
-                            </span>
+                            <span className="block truncate">{data}</span>
                             <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
                                 <ChevronUpDownIcon
                                     className="h-5 w-5 text-gray-400"

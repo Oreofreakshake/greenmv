@@ -74,7 +74,7 @@ export default function ViewDetail({ issue, assignedTo, category, status }) {
                                         <p className="text-sm text-gray-500">
                                             Status:
                                         </p>
-                                        <ListBox />
+                                        <ListBox data={status} />
                                     </div>
 
                                     <div className="mt-4">
