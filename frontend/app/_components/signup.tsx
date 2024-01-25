@@ -1,32 +1,66 @@
+"use client"
+
 import React, { useState, FormEvent } from 'react';
+import Navbar from './navbar/navbar';
+import { useRouter } from "next/navigation";
+import axios from 'axios';
 
-export default function SignUp() {
-    const [email, setEmail] = useState('');
-    const [phoneNumber, setPhoneNumber] = useState('');
-    const [password, setPassword] = useState('');
+export default function SignUpPage() {
+    const router = useRouter();
+    const [user, SetUser] = useState({
+        username: "",
+        number: "",
+        password: "",
+    });
 
-    const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        // Handle the signup logic here
-        console.log("Signing up with: ", { email, phoneNumber, password });
+    const InputChange = (event: { target: { name: any; value: any } }) => {
+        const { name, value } = event.target;
+        SetUser((prevState) => ({ ...prevState, [name]: value }));
     };
 
+    const handleSubmit = () => {
+        axios
+            .post("http://localhost:3010/api/user", {
+                username: user.username,
+                number: user.number,
+                password: user.password,
+            })
+            .then((res) => {
+   
+                SetUser({
+                    username: "",
+                    number: "",
+                    password: "",
+                });
+                router.push("/")
+            })
+            .catch((error) => {
+                console.log("error")
+            });
+    };
+
+    const RouteToSignIn =()=>{
+        router.push("/")
+    }
+
     return (
-        <div className="flex min-h-screen bg-gradient-to-r from-blue-50 to-indigo-50 justify-center items-center">
+        <div>
+            <Navbar routeHome={RouteToSignIn}  Route='Home'/>
+            <div className="flex min-h-screen bg-gradient-to-r from-blue-50 to-indigo-50 justify-center items-center">
             <div className="bg-white py-8 px-4 shadow-lg sm:rounded-lg sm:px-10 w-full max-w-md">
                 <h2 className="text-3xl font-extrabold text-center text-gray-900 mb-6">Sign Up</h2>
-                <form onSubmit={handleSubmit} className="space-y-6">
+                <form className="space-y-6">
                     <div>
                         <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                            Email
+                            Username
                         </label>
                         <input
-                            id="email"
-                            type="email"
+                            type="text"
+                            name='username'
+                            onChange={InputChange}
+                            value={user.username}
                             required
                             className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
                         />
                     </div>
                     <div>
@@ -34,12 +68,12 @@ export default function SignUp() {
                             Phone Number
                         </label>
                         <input
-                            id="phone"
                             type="tel"
+                            name='number'
                             required
                             className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                            value={phoneNumber}
-                            onChange={(e) => setPhoneNumber(e.target.value)}
+                            onChange={InputChange}
+                            value={user.number}
                         />
                     </div>
                     <div>
@@ -47,16 +81,17 @@ export default function SignUp() {
                             Password
                         </label>
                         <input
-                            id="password"
                             type="password"
+                            name='password'
                             required
                             className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
+                            onChange={InputChange}
+                            value={user.password}
                         />
                     </div>
                     <div>
                         <button
+                        onClick={handleSubmit}
                             type="submit"
                             className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                         >
@@ -66,5 +101,8 @@ export default function SignUp() {
                 </form>
             </div>
         </div>
+
+        </div>
+        
     );
 }

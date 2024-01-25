@@ -70,10 +70,12 @@ export default function Table() {
             </div>
 
             <div className="flex gap-4 mb-3">
-                <button onClick={refresh}>
-                    <RefreshIcon />
-                </button>
-                Refresh the database
+            <button
+                        onClick={refresh}
+                        className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded"
+                    >
+                        View All Issues
+                    </button>
             </div>
             <div className="overflow-x-auto rounded-lg mb-24 border border-gray-200">
                 <table className="min-w-full divide-y-2 text-left divide-gray-200 bg-white text-sm">

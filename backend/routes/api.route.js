@@ -129,4 +129,17 @@ router.patch("/data/:id", async (req, res, next) => {
     }
 });
 
+router.post("/user", async (req, res, next) => {
+    try {
+        const data = await prisma.user.create({
+            data: req.body,
+        });
+        res.json({ status: res.status, success: "created" });
+    } catch (error) {
+        next(error);
+        res.json({ status: res.status, success: "failed" });
+    }
+});
+
+
 module.exports = router;

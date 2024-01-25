@@ -54,7 +54,7 @@ export default function LoginPage() {
                 routeHome={handleLoginClick}
                 routeLogin={() => "pass"}
                 Route="User Login"
-                Submit="Submit"
+                Submit=""
                 Login=""
             />
 

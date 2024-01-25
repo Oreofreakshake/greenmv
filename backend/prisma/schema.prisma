@@ -30,3 +30,10 @@ model Admin {
     username String @unique
     password String @unique
 }
+
+model User {
+    id       Int    @id @default(autoincrement())
+    username String @unique
+    number   String 
+    password String
+}

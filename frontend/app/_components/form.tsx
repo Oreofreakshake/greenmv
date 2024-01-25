@@ -8,7 +8,6 @@ interface FormData {
     issue: string;
     location: string;
     category: string;
-    photo: File | null;
 }
 
 export default function Form() {
@@ -20,7 +19,6 @@ export default function Form() {
         issue: "",
         location: "",
         category: "",
-        photo: null
     });
 
     const categories = [
@@ -30,23 +28,22 @@ export default function Form() {
     ].sort();
 
     const buttonClick = () => {
-        const formData = new FormData();
         
-        Object.keys(data).forEach(key => {
-            const value = data[key as keyof FormData];
-            if (key === 'photo') {
-                // Append photo only if it's not null
-                if (value instanceof File) {
-                    formData.append(key, value);
-                }
-            } else {
-                // Assuming all other values are strings
-                formData.append(key, value as string);
-            }
-        });
+        // Object.keys(data).forEach(key => {
+        //     const value = data[key as keyof FormData];
+        //     if (key === 'photo') {
+        //         // Append photo only if it's not null
+        //         if (value instanceof File) {
+        //             formData.append(key, value);
+        //         }
+        //     } else {
+        //         // Assuming all other values are strings
+        //         formData.append(key, value as string);
+        //     }
+        // });
     
         axios
-            .post("http://localhost:3010/api/data", formData)
+            .post("http://localhost:3010/api/data", data)
             .then(() => {
                 setSubmitData(true);
                 setData({
@@ -55,7 +52,6 @@ export default function Form() {
                     issue: "",
                     location: "",
                     category: "",
-                    photo: null
                 });
             })
             .catch((error) => {
@@ -65,16 +61,16 @@ export default function Form() {
     
     
 
-    const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        buttonClick();
-    };
+    // const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    //     event.preventDefault();
+    //     buttonClick();
+    // };
 
 
 
-    const InputChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const InputChange = (event: { target: { name: any; value: any } }) => {
         const { name, value } = event.target;
-        setData(prevState => ({ ...prevState, [name as keyof FormData]: value }));
+        setData((prevState) => ({ ...prevState, [name]: value }));
     };
 
     const handlePhotoChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -111,7 +107,7 @@ export default function Form() {
                 </button>
             </div>
 
-            <form onSubmit={handleSubmit} className="p-4">
+            <form className="p-4">
                 {/* Name and Contact Fields */}
                 <div className="flex gap-4 mb-4">
                     {/* Name Field */}
@@ -189,7 +185,7 @@ export default function Form() {
                 </div>
 
                 {/* Photo Upload */}
-                <div className="mb-4">
+                {/* <div className="mb-4">
                     <label htmlFor="photo" className="block text-sm font-medium">Photo of the Issue</label>
                     <input
                         type="file"
@@ -197,7 +193,7 @@ export default function Form() {
                         onChange={handlePhotoChange}
                         className="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100"
                     />
-                </div>
+                </div> */}
 
                 {/* Submit Button */}
                 <div className="flex justify-end">

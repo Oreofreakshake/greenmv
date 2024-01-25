@@ -4,18 +4,13 @@ import MaldivesImage from '../assets/maldivesislands.jpg';
 
 export default function Header() {
     return (
-        <section 
-            className="bg-white bg-opacity-60 relative" 
-            style={{ 
-                backgroundImage: `url(${MaldivesImage})`, // Replace with the path to your image
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                backgroundRepeat: 'no-repeat',
-            }}
-        >
+        <section >
+            
+            
+            
+        
             <div 
-                className="mx-auto max-w-screen-xl py-12 lg:py-48"
-                style={{ backdropFilter: 'blur(5px)' }} // Apply a blur effect to the content background for readability
+                className=" mx-auto max-w-screen-xl py-12 lg:py-48"
             >
                 <div className="font-poppins text-center">
                     <h1 className="text-6xl font-bold pb-10 text-gray-800">
