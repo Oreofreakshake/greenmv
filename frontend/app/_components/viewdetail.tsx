@@ -174,7 +174,7 @@ export default function ViewDetail({
                                                     </p>
                                                 </div>
                                                 <div className="mt-4">
-                                                    <p className="text-sm text-gray-500">
+                                                   {/* <p className="text-sm text-gray-500">
                                                         <label
                                                             htmlFor="UserEmail"
                                                             className="relative block overflow-hidden border-b border-gray-200 bg-transparent pt-3 focus-within:border-blue-600"
@@ -195,6 +195,31 @@ export default function ViewDetail({
                                                             <span className="absolute start-0 top-2 -translate-y-1/2 text-xs text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-2 peer-focus:text-xs">
                                                                 Assigned to:{" "}
                                                                 {assignedTo}
+                                                            </span>
+                                                        </label>
+                                                    </p> */}
+                                                    <p className="text-sm text-gray-500">
+                                                        <label
+                                                            htmlFor="UserEmail"
+                                                            className="relative block overflow-hidden border-b border-gray-200 bg-transparent pt-3 focus-within:border-blue-600"
+                                                        >
+                                                            <select
+                                                                name="assignedTo"
+                                                                onChange={InputChange}
+                                                                value={modalData.assignedTo}
+                                                                className="peer h-8 w-full border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
+                                                            >
+                                                                <option value="Abaas">Abaan</option>
+                                                                <option value="Absal">Absal</option>
+                                                                <option value="Ahzam">Ahzam</option>
+                                                                <option value="Shimaah">Shimaah</option>
+                                                                <option value="Affaan">Affaan</option>
+                                                                <option value="Aswaaru">Aswaaru</option>
+                                                                <option value="Shaimal">Shaimal</option>
+                                                            </select>
+
+                                                            <span className="absolute start-0 top-2 -translate-y-1/2 text-xs text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-2 peer-focus:text-xs">
+                                                                Assigned to: {modalData.assignedTo}
                                                             </span>
                                                         </label>
                                                     </p>

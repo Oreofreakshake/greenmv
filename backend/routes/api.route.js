@@ -92,12 +92,17 @@ router.post("/logout", verify, (req, res) => {
 });
 
 // =========================================================================================================
-//Data
+// Data
 
 router.get("/data", verify, async (req, res, next) => {
     try {
-        const data = await prisma.data.findMany({});
-        res.json(data);
+        const userId = req.user.id; // Using the user's ID from the JWT token
+        const assignedData = await prisma.data.findMany({
+            where: {
+                assignedTo: String(userId) // Assuming 'assignedTo' is a string representing the user ID
+            }
+        });
+        res.json(assignedData);
     } catch (error) {
         next(error);
     }
@@ -140,6 +145,5 @@ router.post("/user", async (req, res, next) => {
         res.json({ status: res.status, success: "failed" });
     }
 });
-
 
 module.exports = router;
