@@ -15,8 +15,6 @@ export default function DashboardPage() {
         window.location.reload();
     };
 
-    
-
     useEffect(() => {
         axios
             .post("http://localhost:3010/api/refresh", {
@@ -36,7 +34,7 @@ export default function DashboardPage() {
     };
 
     const routeToIssues = () => {
-        router.push("/dashboard/issues"); // Adjust the path as needed
+        router.push("/issues"); // Adjust the path as needed
     };
 
     return (

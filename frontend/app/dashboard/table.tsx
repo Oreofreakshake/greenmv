@@ -116,6 +116,7 @@ export default function Table() {
                                             assignedTo={data.assignedTo}
                                             category={data.category}
                                             status={data.status}
+                                            id={data.id}
                                         />
                                     </td>
                                 </tr>

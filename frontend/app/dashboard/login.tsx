@@ -30,6 +30,7 @@ export default function LoginPage() {
                 cookie.set("auth", `$`);
                 cookie.set("accessToken", res.data["accessToken"]);
                 cookie.set("refreshToken", res.data["refreshToken"]);
+                cookie.set("user", res.data["user"]["username"]);
                 SetUser({
                     username: "",
                     password: "",
@@ -56,6 +57,7 @@ export default function LoginPage() {
                 Submit="Submit"
                 Login=""
             />
+
             <section className="bg-white font-poppins">
                 <div className="lg:grid lg:min-h-screen lg:grid-cols-12">
                     <aside className="relative block h-16 lg:order-last lg:col-span-5 lg:h-full xl:col-span-6">

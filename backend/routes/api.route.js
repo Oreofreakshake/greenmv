@@ -60,6 +60,7 @@ router.post("/login", async (req, res) => {
         res.json({
             accessToken,
             refreshToken,
+            user,
         });
     } else {
         res.status(400).json("Username or Password is incorrect!");
