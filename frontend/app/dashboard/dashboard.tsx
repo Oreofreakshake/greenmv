@@ -36,7 +36,7 @@ export default function DashboardPage() {
     };
 
     const routeToIssues = () => {
-        router.push("/dashboard/issues"); // Adjust the path as needed
+        router.push("greenmv/frontend/app/dashboard/issues.tsx"); // Adjust the path as needed
     };
 
     return (
@@ -49,7 +49,7 @@ export default function DashboardPage() {
                 Login="Logout"
             />
             <header aria-label="Page Header" className="bg-gradient-to-r from-blue-500 to-indigo-700 text-white">
-                <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
+                <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-0 lg:px-12">
                     <div className="text-center mb-24">
                         <h1 className="text-4xl font-bold sm:text-5xl">
                             Dashboard

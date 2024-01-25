@@ -53,7 +53,7 @@ export default function LoginPage() {
             <Navbar
                 routeHome={handleLoginClick}
                 routeLogin={() => "pass"}
-                Route="Home"
+                Route="User Login"
                 Submit="Submit"
                 Login=""
             />

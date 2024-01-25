@@ -1,6 +1,11 @@
 import React from 'react';
+import { FormEvent } from 'react';
 
-export default function SignIn({ signin }) {
+interface SignInProps {
+  signin: (event: FormEvent<HTMLFormElement>) => void;
+}
+
+export default function SignIn({ signin }: SignInProps) {
     return (
         <div className="flex min-h-screen bg-gradient-to-r from-blue-50 to-indigo-50">
             {/* Sign In Section */}
@@ -11,7 +16,7 @@ export default function SignIn({ signin }) {
 
                 <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
                     <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-                        <form className="space-y-6" action="#" method="POST">
+                        <form className="space-y-6" onSubmit={signin}>
                             <div>
                                 <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                                     Email
@@ -56,7 +61,6 @@ export default function SignIn({ signin }) {
 
                             <div>
                                 <button
-                                    onClick={signin}
                                     type="submit"
                                     className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                                 >
