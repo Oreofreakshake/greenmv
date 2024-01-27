@@ -23,6 +23,7 @@ model Staff {
     id       Int    @id @default(autoincrement())
     username String @unique
     password String @unique
+    role String?
 }
 
 model Admin {

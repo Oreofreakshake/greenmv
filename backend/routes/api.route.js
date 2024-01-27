@@ -94,19 +94,38 @@ router.post("/logout", verify, (req, res) => {
 // =========================================================================================================
 // Data
 
-router.get("/data", verify, async (req, res, next) => {
+router.get("/data",  async (req, res, next) => {
+
     try {
-        const userId = req.user.id; // Using the user's ID from the JWT token
+        // const userId = req.user.id; // Using the user's ID from the JWT token 
         const assignedData = await prisma.data.findMany({
-            where: {
-                assignedTo: String(userId) // Assuming 'assignedTo' is a string representing the user ID
-            }
+            // where: {
+            //     assignedTo: String(userId) // Assuming 'assignedTo' is a string representing the user ID
+            // }
         });
+        console.log('data '+ assignedData)
         res.json(assignedData);
+        
+
     } catch (error) {
         next(error);
     }
 });
+
+router.get("/data/:user", async (req,res,next)=>{
+    try{
+        const user = req.params.user
+        const userAssignedData = await prisma.data.findMany({
+            where: {
+                assignedTo: user
+            }
+        })
+        res.json(userAssignedData)
+
+    }catch(error){
+        next(error)
+    }
+})
 
 router.post("/data", async (req, res, next) => {
     try {

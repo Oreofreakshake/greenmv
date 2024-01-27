@@ -27,15 +27,18 @@ export default function LoginPage() {
                 password: user.password,
             })
             .then((res) => {
+                
                 cookie.set("auth", `$`);
                 cookie.set("accessToken", res.data["accessToken"]);
                 cookie.set("refreshToken", res.data["refreshToken"]);
                 cookie.set("user", res.data["user"]["username"]);
+                cookie.set("role",res.data["user"]["role"]);
                 SetUser({
                     username: "",
                     password: "",
                 });
                 window.location.reload();
+                console.log(res)
             })
             .catch((error) => {
                 setIncorrect(true);

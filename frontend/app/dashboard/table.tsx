@@ -19,8 +19,12 @@ interface DataItem {
 
 export default function Table() {
     const [data, setData] = useState<DataItem[]>([]);
+    const [adminData, setAdminData] = useState<DataItem[]>([]);
 
     const accessToken = cookies.get("accessToken");
+    const user = cookies.get("user");
+    const role = cookies.get("role");
+    console.log(user)
 
     const header = {
         headers: {
@@ -29,15 +33,27 @@ export default function Table() {
     };
 
     const refresh = () => {
+
         axios
-            .get("http://localhost:3010/api/data", header)
+            .get(`http://localhost:3010/api/data/${user}`, header)
             .then((response) => {
                 setData(response.data);
+
+            })
+            .catch((error) => {
+                console.log("error");
+            });
+            axios
+            .get(`http://localhost:3010/api/data`, header)
+            .then((response) => {
+                setAdminData(response.data);
+
             })
             .catch((error) => {
                 console.log("error");
             });
     };
+    
 
     const count = data.length;
     let raisedIssues = 0;
@@ -74,7 +90,7 @@ export default function Table() {
                         onClick={refresh}
                         className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded"
                     >
-                        View All Issues
+                    View All Issues
                     </button>
             </div>
             <div className="overflow-x-auto rounded-lg mb-24 border border-gray-200">
@@ -97,32 +113,34 @@ export default function Table() {
                     </thead>
 
                     <tbody className="divide-y divide-gray-200">
-                        {data
-                            .slice()
-                            .reverse()
-                            .map((data) => (
-                                <tr key={data.id}>
-                                    <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                                        {data.name}
-                                    </td>
-                                    <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                                        {data.contact}
-                                    </td>
+                    {
+    (role === 'admin' ? adminData : data)
+        .slice()
+        .reverse()
+        .map((item) => (
+            <tr key={item.id}>
+                <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                    {item.name}
+                </td>
+                <td className="whitespace-nowrap px-4 py-2 text-gray-700">
+                    {item.contact}
+                </td>
+                <td className="whitespace-nowrap px-4 py-2 text-gray-700">
+                    {item.location}
+                </td>
+                <td className="whitespace-nowrap px-4 py-2 text-gray-700">
+                    <ViewDetail
+                        issue={item.issue}
+                        assignedTo={item.assignedTo}
+                        category={item.category}
+                        status={item.status}
+                        id={item.id}
+                    />
+                </td>
+            </tr>
+        ))
+}
 
-                                    <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                                        {data.location}
-                                    </td>
-                                    <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                                        <ViewDetail
-                                            issue={data.issue}
-                                            assignedTo={data.assignedTo}
-                                            category={data.category}
-                                            status={data.status}
-                                            id={data.id}
-                                        />
-                                    </td>
-                                </tr>
-                            ))}
                     </tbody>
                 </table>
             </div>
