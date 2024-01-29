@@ -11,10 +11,17 @@ export default function ViewDetail({
     status,
     id,
 }) {
+    
     let [isOpen, setIsOpen] = useState(false);
+    const role = cookies.get("role") ?? "No role Specified";
+    const user = cookies.get("user");
+
     const [modalData, setmodalData] = useState({
-        assignedTo: "",
+        assignedTo: role === "staff" ? user : "lushan",
+        status: "Pending",
     });
+
+    console.log(modalData)
     function closeModal() {
         setIsOpen(false);
         axios
@@ -199,7 +206,7 @@ export default function ViewDetail({
                                                         </label>
                                                     </p> */}
                                                     <p className="text-sm text-gray-500">
-                                                        <label
+                                                        {role === "admin" ?(<label
                                                             htmlFor="UserEmail"
                                                             className="relative block overflow-hidden border-b border-gray-200 bg-transparent pt-3 focus-within:border-blue-600"
                                                         >
@@ -221,7 +228,7 @@ export default function ViewDetail({
                                                             <span className="absolute start-0 top-2 -translate-y-1/2 text-xs text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-2 peer-focus:text-xs">
                                                                 Assigned to: {modalData.assignedTo}
                                                             </span>
-                                                        </label>
+                                                        </label>): `Assigned to: ${user}`}
                                                     </p>
                                                 </div>
                                                 <div className="mt-2">
@@ -233,11 +240,20 @@ export default function ViewDetail({
                                                     
                                                     </p>
                                                 </div>
-                                                <div className="flex items-center gap-3 mt-4 pb-12">
-                                                    <p className="text-sm text-gray-500">
-                                                        Status: {status}
-                                                    </p>
-                                                </div>
+                                                {role === "staff" ?(<div className="flex items-center gap-3 mt-4 pb-12">
+                                                    <p>Status: </p>
+                                                <select
+                                                                name="status"
+                                                                onChange={InputChange}
+                                                                value={modalData.status}
+                                                                className="peer h-8 w-full border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
+                                                            >
+                                                                <option value="Completed">Completed</option>
+                                                                <option value="In Progress">In Progress</option>
+                                                                <option value="Unresolved">Unresolved</option>
+                                                                <option value="Pending">Pending</option>
+                                                            </select>
+                                                </div>):null}
 
                                                 <div className="mt-4">
                                                     <button
